@@ -7,9 +7,11 @@ const DoctorSchema = new Schema(
     profession: [{ type: String }],
     hospital: { type: Schema.Types.ObjectId },
     experience: { type: Number },
-    phoneNumber: { type: String },
+    phoneNumber: { type: String, unique: true, required: true },
   },
   { timestamps: true }
 );
 
 const DoctorModel = model("Doctor", DoctorSchema);
+
+module.exports = DoctorModel;

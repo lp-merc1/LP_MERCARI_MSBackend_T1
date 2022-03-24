@@ -1,6 +1,7 @@
 const express = require("express");
 const connect = require("./db/connect");
-const { default: requiresUser } = require("./middleware/requireUser");
+const deserializeUser = require("./middleware/deserializeUser");
+const requiresUser = require("./middleware/requireUser");
 const app = express();
 const AppointmentModel = require("./model/appointment");
 
@@ -9,11 +10,13 @@ require("dotenv").config({ path: "../.env" });
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const port = process.env.PORT || 5003;
+app.use(deserializeUser);
 
-app.post("/appointment/book", [requiresUser], async (req, res) => {
+const port = process.env.PORT || 5004;
+
+app.post("/book", requiresUser, async (req, res) => {
   try {
-    const patientNHID = res.locals.user.NHID;
+    const patientNHID = res.locals.user.id;
     const doctorId = req.body.doctorId;
     const timing = req.body.timing;
 
@@ -31,9 +34,9 @@ app.post("/appointment/book", [requiresUser], async (req, res) => {
   }
 });
 
-app.post("/appointment/confirm", [requiresUser], async (req, res) => {
+app.post("/confirm", requiresUser, async (req, res) => {
   try {
-    const user = res.locals.user._id;
+    const user = res.locals.user.id;
     const appointmentId = req.body.appointmentId;
 
     const appointment = await AppointmentModel.findOne({

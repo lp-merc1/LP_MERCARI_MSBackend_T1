@@ -4,13 +4,13 @@ const connect = require("./db/connect");
 const app = express();
 const cors = require("cors");
 
-require("dotenv").require();
+require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const port = process.env.PORT || 5003;
+const port = process.env.PORT || 5001;
 
 app.get("/", async (req, res) => {
   try {

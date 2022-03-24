@@ -1,4 +1,4 @@
-import { get } from "lodash";
+const { get } = require("lodash");
 
 const requiresUser = async (req, res, next) => {
   const user = res.locals.user;
@@ -10,4 +10,4 @@ const requiresUser = async (req, res, next) => {
   return next();
 };
 
-export default requiresUser;
+module.exports = requiresUser;

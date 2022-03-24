@@ -15,9 +15,8 @@ const port = process.env.PORT || 5000;
 
 app.post("/create", async (req, res) => {
   try {
-    const { email, password, type, phoneNumber, id } = req.body;
+    const { password, type, phoneNumber, id } = req.body;
     const user = await UserModel.create({
-      email,
       password,
       type,
       phoneNumber,
@@ -35,8 +34,8 @@ app.post("/create", async (req, res) => {
 
 app.post("/session", async (req, res) => {
   try {
-    const { email, password, phoneNumber } = req.body;
-    const user = await UserModel.findOne({ $or: [{ email }, { phoneNumber }] });
+    const { password, phoneNumber } = req.body;
+    const user = await UserModel.findOne({ phoneNumber });
 
     if (!user) {
       return res.status(404).json({ success: false, message: "User not find" });

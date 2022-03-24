@@ -1,6 +1,5 @@
-import { get } from "lodash";
-import { decode } from "../utils/jwt.utils";
-import { reIssueAccessToken } from "../service/session.service";
+const { get } = require("lodash");
+const { decode } = require("../helper/jwt.utils");
 
 const deserializeUser = async (req, res, next) => {
   const accessToken = get(req, "headers.authorization", "").replace(
@@ -19,4 +18,4 @@ const deserializeUser = async (req, res, next) => {
   return next();
 };
 
-export default deserializeUser;
+module.exports = deserializeUser;

@@ -11,3 +11,5 @@ const HospitalSchema = new Schema(
 );
 
 const HospitalModel = model("Hospital", HospitalSchema);
+
+module.exports = HospitalModel;
