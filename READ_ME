@@ -1,0 +1,22 @@
+The problem statement requires us to design an app, which digitalises the
+health care system, and at the same time is scalable for Multi Chain
+Hospitals under NHM. This app will provide all the records in one place.
+Key Features of the app
+1.The app will contain basic details and all medical records of the patients
+2.The app will also contain a list of doctors, their basic details and ratings.
+3.the app will allow users to book appointments with doctors.
+
+Detailed description of the App-
+● Users need to sign-up to the app, create an account. This will require them to enter details like
+name, age, gender, weight, height, email id, contact number, address, etc.
+● All medical history of the patient should be updated at the time of creating the account.
+● Then onwards all of the records will be uploaded on the app, on a time to time basis.
+● The interface upon login shows a list of top doctors, also there is an option to search for doctors.
+
+
+Detailed description of the App-
+● When a particular doctor is searched for, the page displays the ratings and patient satisfaction
+and reviews.
+● It will also display the doctor’s about info, and gives the user an option to call or chat with the
+doctor.
+● The app also allows the user to schedule an appointment with a doctor of their choice.
