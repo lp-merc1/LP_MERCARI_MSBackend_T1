@@ -14,9 +14,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Get the Image
-app.get("/getImage", async (req, res) => {
+app.get("/getImage/:file", async (req, res) => {
   try {
-    const file = req.body.file;
+    const file = req.params.file;
     return res.download(path.join(__dirname, "reports", file));
   } catch (error) {
     console.log(error);
