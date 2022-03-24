@@ -4,7 +4,7 @@ const PatientSchema = new mongoose.Schema(
   {
     NHID: { type: String, required: true, unique: true },
     name: { type: String, required: true },
-    gender: { type: Number, required: true },
+    gender: { type: String, required: true },
     age: { type: Number, required: true },
     address: { type: String },
     phoneNumber: { type: String },

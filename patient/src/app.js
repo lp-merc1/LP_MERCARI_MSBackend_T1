@@ -4,6 +4,8 @@ const cors = require("cors");
 const connect = require("./db/connect");
 const PatientModel = require("./model/Patient");
 const app = express();
+const axios = require("axios");
+const { generateNHID } = require("./helper/NHID");
 
 require("dotenv").config({ path: "../.env" });
 
@@ -28,7 +30,7 @@ app.get("/:nhid", async (req, res) => {
     const NHID = req.params.nhid;
     const patient = await PatientModel.findOne({ NHID });
 
-    return res.json({ patient });
+    return res.json({ patient: [patient] });
   } catch (error) {
     console.log(error);
     return res.status(500).send({ message: "Internal Server Error" });
@@ -63,6 +65,7 @@ app.post("/create", async (req, res) => {
       message: "User Created . Login to continue",
     });
   } catch (error) {
+    console.log(error);
     return res
       .status(500)
       .send({ success: false, message: "Internal Server Error" });

@@ -1,9 +1,11 @@
 const express = require("express");
 const UserModel = require("./model/User");
 const app = express();
+const connect = require("./db/connect");
 const cors = require("cors");
+const { sign, decode } = require("./helper/jwt.utils");
 
-require("dotenv").require();
+require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
@@ -24,6 +26,7 @@ app.post("/create", async (req, res) => {
 
     return res.sendStatus(200);
   } catch (error) {
+    console.log(error);
     return res
       .status(500)
       .json({ message: "Internal Server error", success: false });
@@ -47,8 +50,9 @@ app.post("/session", async (req, res) => {
 
     const accessToken = createAccessToken({ user: user.toJSON() });
 
-    return res.send(accessToken);
+    return res.json({ accessToken: accessToken });
   } catch (error) {
+    console.log(error);
     return res
       .status(500)
       .json({ message: "Internal Server error", success: false });
@@ -66,4 +70,5 @@ function createAccessToken({ user }) {
 
 app.listen(port, async () => {
   console.log(`Listening on port ${port}`);
+  await connect();
 });

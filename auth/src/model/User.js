@@ -11,18 +11,14 @@ const UserSchema = new Schema(
   },
   {
     timestamps: true,
-    toJSON: {
-      transform: function (doc, ret) {
-        delete ret.passowrd;
-      },
-    },
-    toObject: {
-      transform: function (doc, ret) {
-        delete ret.passowrd;
-      },
-    },
   }
 );
+
+UserSchema.methods.toJSON = function () {
+  let userObject = this.toObject();
+  delete userObject.password;
+  return userObject;
+};
 
 UserSchema.pre("save", async function (next) {
   let user = this;
@@ -49,3 +45,5 @@ UserSchema.methods.comparePassword = async function (candidatePassword) {
 };
 
 const UserModel = model("User", UserSchema);
+
+module.exports = UserModel;

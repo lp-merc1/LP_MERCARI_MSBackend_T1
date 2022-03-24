@@ -1,5 +1,6 @@
 const express = require("express");
 const HospitalModel = require("./models/Hospital");
+const connect = require("./db/connect");
 const app = express();
 const cors = require("cors");
 
@@ -25,4 +26,5 @@ app.get("/", async (req, res) => {
 
 app.listen(port, async () => {
   console.log(`Listening on port ${port}`);
+  await connect();
 });
