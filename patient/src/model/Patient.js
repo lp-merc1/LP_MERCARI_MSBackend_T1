@@ -10,6 +10,7 @@ const PatientSchema = new mongoose.Schema(
     phoneNumber: { type: String },
     xRayReports: [{ type: String }],
     medicalReports: [{ type: String }],
+    checkedBy: [{ type: String }],
   },
   {
     timestamps: true,

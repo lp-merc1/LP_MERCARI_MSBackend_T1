@@ -2,13 +2,11 @@ const jwt = require("jsonwebtoken");
 
 const privateKey = process.env.PRIVATEKEY;
 
-console.log(privateKey);
-
-function sign(object, options) {
-  return jwt.sign(object, "privateKey", options);
+export function sign(object, options) {
+  return jwt.sign(object, privateKey, options);
 }
 
-function decode(token) {
+export function decode(token) {
   try {
     const decoded = jwt.verify(token, privateKey);
 
@@ -21,5 +19,3 @@ function decode(token) {
     };
   }
 }
-
-module.exports = { sign, decode };
